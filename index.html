@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="#">
+    <script type="module" src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>    
+<body>
+    <div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+       <table style="padding: 4px; border: 2px;">
+      <tr>
+        <th >Archer_atack_speed +1</th>
+        <th>Rain cost -1</th>
+        <th>Snow cost -2</th>
+        <th>Gold Cart speed and capacity +1</th>
+      </tr>
+      <tr>
+        <td id="archer_cost_speed">10</td>
+        <td id="rain_cost_decrees">250</td>
+        <td id="snow_cost_decrees">450</td>
+        <td id="gold_cart_increase">30</td>
+      </tr>
+      <tr>
+        <td><button id="archer_speed">Buy</button></td>
+        <td><button  id="rain_cost_decrees_button">Buy</button></td>
+        <td><button id="snow_cost_decrees_button" >Buy</button></td>
+        <td><button id="gold_cart_increase_button">Buy</button></td>
+      </tr>
+    </table>
+        
+        </table>
+        </p>
+      </div>
+    
+    </div>
+    
+<table> 
+<tr>
+<th valign="bottom">
+<div class="column">
+    <section class="container-btn">
+        <div class="btn-home" id="upgrade">Upgrade</div>
+    </section>
+    <div class="container">   
+      <img src="assets/bomb_icon.png" alt="Bomb" style="width:100%; user-select: none;" id="bomb">
+      <div class="top-left" style="color:black;font-size:50px" id="bomb_number">3</div>
+      </div>
+    <div class="container">   
+      <img src="assets/fire_icon.png" alt="Fire" style="width:100%; user-select: none;visibility: hidden" id="fire">
+      <div class="top-left" id="fire_cost">20</div>
+      </div>
+    <div class="container">   
+    <img src="assets/snow.png" alt="Snow" style="width:100%; user-select: none;visibility: hidden" id="snow">
+    <div class="top-left" id="snow_cost">15</div>
+    </div>
+    <div class="container">   
+    <img src="assets/rain.png" alt="Snow" style="width:100%; user-select: none; visibility: hidden" id="rain">
+    <div class="top-left" id="RAIN_COST">6</div>
+    </div>
+    <img src="assets/mana_space.png" alt="Snow" style="width:100%; user-select: none; visibility: hidden" id="mana_space">
+</div>
+</th>
+<th>
+<div id="start-screen" class="screen" style="display:block">
+        <button class="buttonStart" id="myBtn">Start Game</button>
+</div>
+<canvas id="gameScreen" width="800" height="600"> <button id="myBtn">Start Game</button> 
+</canvas>
+</th>
+
+<th valign="bottom">
+    <div class="column">
+      <div class="container">   
+        <img src="assets/solider_icon.png" style="width:100% ; user-select: none;"  id="solider">
+        <div class="top-left" id="solider_cost">320</div>
+           </div>
+        <div class="container">
+      <div class="container">   
+        <img src="assets/gold_cart_icon.png" style="width:100% ; user-select: none;"  id="gold_cart">
+        <div class="top-left" id="gold_cart_cost">70</div>
+           </div>
+        <div class="container">   
+     <img src="assets/archer_icon.png" style="width:100% ; user-select: none;"  id="archer">
+     <div class="top-left" id="archer_cost">5</div>
+        </div>
+     <img src="assets/gold_space.png"  style="width:100% ; user-select: none;" id="gold_space">
+     </div>
+</th>
+</tr>
+</table>   
+<div  class="popup" >
+    <span class="popuptext" id="myPopup">A Simple Popup!</span>
+</div>  
+</body>
+</html>

@@ -1,0 +1,286 @@
+body {
+    font-size:16px;
+    margin:0px;
+    padding:0px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:#04131D;
+    font-family: Arial;
+}
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+
+  
+  /* Clear floats after image containers */
+  .cell{
+    vertical-align: bottom;   
+    clear: both;
+    display: table;
+}
+
+table, th {
+  border: 1px solid black;
+}
+
+.rightAlign{
+    text-align: right 
+}
+
+.buttonStart {
+    border:none;
+    appearance:none;
+    outline:none;
+    display:inline-block;
+    font-size:1.5em;
+    cursor:pointer;
+    text-decoration:none;
+    padding:12px 48px 12px 48px;
+    border-radius:4px;
+    color:#ffffff;
+    background-color:#1bafdb;
+    border: 2px solid #ffffff;
+}
+.buttonStart {   transition-duration: 0.4s; }
+.buttonStart:hover {
+    font-size:1.6em;
+    background-color:#05c46b;
+}
+.screen {
+    padding: 20px;     
+    position: fixed;     
+    top:50%;     
+    left:50%;     
+    margin-top: -100px;     
+    margin-left: -100px;     
+    height:200px;     
+    width:250px;     
+    text-align: center;
+}
+canvas {
+   border: 3px solid #000000;
+   /* background-image:    url(assets/background.png);
+   background-size:     cover;                      
+   background-repeat:   no-repeat;
+   background-position: center center; */
+}
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* The actual popup */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  .popup .hide {
+    visibility: visible;
+    -webkit-animation: fadeOut 1s forwards;
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+  }
+
+
+  h1{
+    letter-spacing: 2px;
+    font-family: 'Skranji', cursive;
+    color: #ffc000;
+    font-size: 26px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+  }
+  
+  .img-logo{
+    width: 150px;
+    margin: 30px auto;
+    display: table;
+    animation-name: logo-move;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes logo-move {
+      0% {transform: rotate(0deg)}
+      100% {transform: rotate(360deg)}
+  }
+  
+  .btn-home{
+    margin: 5px auto;
+    width: 100px;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    font-family: 'Skranji', cursive;
+    color: #ffc000;
+    font-size: 18px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    padding: 10px 0;
+    background: radial-gradient(circle, #196183, #0c0a2c);
+    border-top: 4px ridge #ffb000;
+    border-left: 4px groove #ffb000;
+    border-right: 4px ridge #ffb000;
+    border-bottom: 4px groove #ffb000;
+    box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+  }
+  
+  .btn-home:hover{
+    background: radial-gradient(circle, #2be5e5, #07263b);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+  }
+  
+  .btn-home:active{
+    background: radial-gradient(circle, #ec6a6a, #e52b2b);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+  }
+
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+  @-webkit-keyframes fadeOut {
+    from {opacity: 1;} 
+    to {opacity: 0;
+        overflow:hidden;
+        visibility:hidden;
+    }
+
+    
+  }
+  
+  @keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity:0 ;
+        overflow: hidden;
+        visibility:hidden;
+    }
+  }
+
