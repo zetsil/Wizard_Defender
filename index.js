@@ -12,6 +12,7 @@ document.getElementById("gold_space").addEventListener("mouseleave",stopGold);
 
 document.getElementById("rain").addEventListener("click",startRain);
 document.getElementById("snow").addEventListener("click",startSnow);
+document.getElementById("fire").addEventListener("click",startFire);
 document.getElementById("archer").addEventListener("click",addArcher);
 document.getElementById("gold_cart").addEventListener("click",addCart);
 document.getElementById("solider").addEventListener("click",addSolider);
@@ -67,11 +68,12 @@ window.onclick = function(event) {
     let rain_space = document.getElementById("rain");
     let snow_space = document.getElementById("snow");
     let fire_space =  document.getElementById("fire");
+    
     mana_space.style.visibility="visible";
     rain_space.style.visibility="visible";
     snow_space.style.visibility="visible";
-    startScreen.style.visibility='hidden';
     fire_space.style.visibility="visible";
+    startScreen.style.visibility='hidden';
 
     var popup = document.getElementById("myPopup");
     popup.innerHTML = "<----Use blue space to regenerate mana";
@@ -94,39 +96,8 @@ window.onclick = function(event) {
 
 
 
-    game = new Game(ctx);
-   // var move = 0;
-  //   canvas.addEventListener("mousemove", function(e) { 
-  //     var cRect = canvas.getBoundingClientRect();        // Gets CSS pos, and width/height
-  //     var canvasX = Math.round(e.clientX - cRect.left);  // Subtract the 'left' of the canvas 
-  //     var canvasY = Math.round(e.clientY - cRect.top); 
-      
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);  // (0,0) the top left of the canvas
-  //     var max_mov = -5;
-      
-  //     if(canvasX <  (canvas.width/2 ))
-  //         move = -1 *(canvas.width/2 - canvasX - 1 );
-  //     if(move <= max_mov)
-  //         move = max_mov;    
-
-  //     if(canvasX >  (canvas.width/2))
-  //         move =  canvasX - canvas.width/2  ;
-  //     if(move >= -max_mov)
-  //         move = -max_mov ;        
-
-
-
-  //     console.log(move);
-
-              
-            
-  //     ctx.resetTransform();
-  //     ctx.translate(move,0);
-                      
-  //     ctx.fillStyle = "grey";
-  //     ctx.font = '48px serif';  // from the X/Y positions to make  
-  //    // ctx.restore();     
-  // });
+   game = new Game(ctx);
+  
 
    game.gameLoop();
 
@@ -179,6 +150,12 @@ function startRain(){
 function startSnow(){
     if (typeof game != "undefined")
        game.castSnow();
+}
+
+
+function startFire(){
+  if (typeof game != "undefined")
+     game.castFire();
 }
 
 function addArcher()

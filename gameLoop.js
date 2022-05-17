@@ -4,6 +4,7 @@ import Enemy from "./enemy.js";
 import Ally from "./ally.js";
 import GoldCart from "./gold_cart.js";
 import Solider from "./solider.js";
+import FireWall from "./fireWall.js";
 export default class Game{
 
     constructor(ctx){
@@ -15,7 +16,8 @@ export default class Game{
         this.height = 600;
         this.ctx = ctx;
         this.lastTime = 0;
-        this.skeletons = []; //array of skeleton enemys 
+
+        this.flame_wall_audio = new Audio("assets/Flame Arrow.mp3")
 
 
         this.archer_sound1 = new Audio("assets/archer_1.mp3")
@@ -114,6 +116,11 @@ export default class Game{
         this.snow_cost = 15;
         this.snow_cost_decreasee = 650;
 
+
+        this.fire_cost = 20;
+        this.fire_wall_animation = new FireWall(this);
+        this.cast_fire = false;
+
         // let x = new Solider(this);
         // this.allys.push(x);
       
@@ -129,7 +136,7 @@ export default class Game{
         // this.interval --> interval created
 
         this.mana = 0;
-        this.gold =0;
+        this.gold =5000;
 
         this.cast_rain = false;
         this.cast_snow = false;
@@ -216,7 +223,36 @@ export default class Game{
   
       }
 
+
+
+
     //--------rain functions end--------
+    //----------------------------------  
+
+    //--------fire functions start--------
+    //----------------------------------  
+
+    castFire()
+    {
+       if(this.mana >= this.fire_cost &&  !this.cast_fire)
+       {
+        this.flame_wall_audio.play();
+           this.cast_fire = true;
+           this.mana -= this.fire_cost;
+           var me = this; 
+           setTimeout(function(){me.cast_fire = false;},5000);
+       }
+
+    }
+
+    draw_fire(deltaTime){
+
+        this.fire_wall_animation.draw(deltaTime);
+          
+    }
+
+
+      //--------fire functions end--------
     //----------------------------------  
 
     //snow functions
@@ -304,7 +340,7 @@ export default class Game{
            Enemy.enemy_freez();
            setTimeout(function(){me.cast_snow = false;
            Enemy.freez = false;
-        },6000);
+        },8000);
        }
 
     }
@@ -341,10 +377,12 @@ export default class Game{
 
         this.updateScore();
 
-        if(this.cast_rain && !this.cast_snow)
+        if(!this.cast_fire && this.cast_rain && !this.cast_snow)
            this.draw_R(); // draw rain
-        if(!this.cast_rain && this.cast_snow) 
+        if(!this.cast_fire && !this.cast_rain && this.cast_snow) 
            this.draw_snow(); // draw snow  
+        if(this.cast_fire && !this.cast_snow && !this.cast_rain) 
+           this.draw_fire(deltaTime); // draw fire     
         
     
            
@@ -438,7 +476,7 @@ export default class Game{
     increaseMana()
     {   
        var me = this; 
-       this.intervalM = setInterval(function(){me.increaseM();},500);//create interval
+       this.intervalM = setInterval(function(){me.increaseM();},800);//create interval
     }
 
     increaseM(){

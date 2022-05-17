@@ -63,7 +63,7 @@ export default class Enemy
             this.frameTimer += deltaTime;
         }
 
-        if(this.health == 0)
+        if(this.health <= 0)
         {
           this.ctx.fillStyle = "yellow";
           let a = String(10 + this.gold * 2) + 'px serif';
@@ -83,11 +83,21 @@ export default class Enemy
         
     }
 
+    instaKill(){
+      this.speed = -20;
+      console.log("am intrat aici");
+      var me = this;
+      setTimeout(function(){me.alive = false;},500);
+      this.game.gold += this.gold;
+      this.health = 0;
+    }
+
     hit(){
        this.kill = true;
        this.speed +=2;
        this.health -= 1;
-       if(this.health == 0){
+
+       if(this.health <= 0){
           this.speed = -20;
           var me = this;
           setTimeout(function(){me.alive = false;},500);
