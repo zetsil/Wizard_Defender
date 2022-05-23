@@ -29,7 +29,7 @@ export default class EvilKnight extends Enemy{
            var me = this;
            this.kill_sound.play();
            setTimeout(function(){me.alive = false;},500);
-           this.game.gold += this.gold;
+           this.game.gold += this.gold + Enemy.gold_up;
         }
  
      }

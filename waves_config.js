@@ -60,6 +60,34 @@ WAVES :{ "WV" : [
 ]
 },
 
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 1,"amont" : 4} , {"type": 'skeleton',"arive" : 3,"amont" : 10} , {"type": 'skeleton',"arive" : 5,"amont" : 9} ,
+  {"type": 'skeleton',"arive" : 6,"amont" : 7},{"type": 'knight',"arive" : 12,"amont" : 2}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 1,"amont" : 4} , {"type": 'knight',"arive" : 3,"amont" : 3} , {"type": 'knight',"arive" : 5,"amont" : 2} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 12}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 2,"amont" : 4} , {"type": 'fire',"arive" : 3,"amont" : 4} , {"type": 'skeleton',"arive" : 5,"amont" : 7} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 10}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 2,"amont" : 4} , {"type": 'skeleton',"arive" : 3,"amont" : 12} , {"type": 'skeleton',"arive" : 8,"amont" : 7} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 10}
+]
+},
+
  ]}
 };
 

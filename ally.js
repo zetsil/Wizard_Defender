@@ -10,8 +10,10 @@ export default class Ally{
         this.skeleton_image.src = 'assets/archere_animation.png';
         this.Width = 30;
         this.Height = 43;
-        this.pos_x = Math.floor(Math.random() * 750);
-        this.pos_y = 550;
+        this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+        if( this.pos_x  >= game.width)
+          this.pos_x = game.width - 30;
+        this.pos_y = game.height - 50;
 
         this.frameX = 0;
         this.max_frame = 4;
@@ -69,7 +71,7 @@ export default class Ally{
     update(deltaTime){
         if(!deltaTime) 
           return;
-        if(this.pos_x > 790){
+        if(this.pos_x > (this.game.width -20)){
             this.speed = -this.speed;
         }
         else if(this.pos_x  < 0 )
@@ -96,7 +98,7 @@ export default class Ally{
           this.projectile.projectile_x = this.pos_x;
           this.projectile.xSpeed = 0;
           this.projectile.ySpeed = 0;
-          this.projectile.projectile_y = 550;
+          this.projectile.projectile_y = this.game.height - 30;
           this.projectile.has_bounce = false;
           if(!Ally.no_reload)
              setTimeout(function(){me.shoot = true;},5500- Ally.reload_time );

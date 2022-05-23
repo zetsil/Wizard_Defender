@@ -8,7 +8,9 @@ export default class Enemy
         this.skeleton_image.src = 'assets/skeleton_animation.png';
         this.Width = 24;
         this.Height = 31;
-        this.pos_x = Math.floor(Math.random() * 750);
+        this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+        if( this.pos_x  >= game.width)
+          this.pos_x = game.width - 30;
         this.pos_y = 0;
 
         this.frameX = 0;
@@ -35,6 +37,7 @@ export default class Enemy
     }
     static up_speed = 0;
     static freez = false;
+    static gold_up = 0;
     
 
 
@@ -66,9 +69,9 @@ export default class Enemy
         if(this.health <= 0)
         {
           this.ctx.fillStyle = "yellow";
-          let a = String(10 + this.gold * 2) + 'px serif';
+          let a = String(10 + (this.gold + Enemy.gold_up) * 2) + 'px serif';
           this.ctx.font = a;
-          this.ctx.fillText(String(this.gold), this.pos_x,this.pos_y);
+          this.ctx.fillText(String(this.gold + Enemy.gold_up), this.pos_x,this.pos_y);
           return;
         }
 
@@ -76,7 +79,7 @@ export default class Enemy
         if(!this.kill && this.created && this.alive)
           this.ctx.drawImage(this.skeleton_image,this.frameX * this.Width,0,this.Width,this.Height,this.pos_x,this.pos_y,this.Width,this.Height);
         else{
-        this.pos_x = Math.floor(Math.random() *  750);
+        this.pos_x =Math.abs(Math.floor(Math.random() *  this.game.width) - 10);
         this.pos_y = 0;
         this.kill = false;
         }
@@ -85,10 +88,9 @@ export default class Enemy
 
     instaKill(){
       this.speed = -20;
-      console.log("am intrat aici");
       var me = this;
       setTimeout(function(){me.alive = false;},500);
-      this.game.gold += this.gold;
+      this.game.gold += this.gold + Enemy.gold_up;
       this.health = 0;
     }
 
@@ -101,7 +103,7 @@ export default class Enemy
           this.speed = -20;
           var me = this;
           setTimeout(function(){me.alive = false;},500);
-          this.game.gold += this.gold;
+          this.game.gold += this.gold  + Enemy.gold_up;
        }
 
     }

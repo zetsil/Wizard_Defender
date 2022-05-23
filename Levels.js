@@ -33,7 +33,7 @@ export default class Level{
             var randomNr = Math.floor(Math.random() * 20)* 1000 + 1000;
             setTimeout(function(){x.created = true;},1000 * x.time_of_arivel + randomNr );
         }
-        if(x.pos_y > 600 && x.alive){
+        if(x.pos_y > (this.game.height ) && x.alive){
             this.escapedEnemys += 1;
             this.wave.splice(i,1);}
 

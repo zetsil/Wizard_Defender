@@ -7,7 +7,7 @@ export default class Projectile
         this.original_pos_x = ally_pox_x;
 
         this.projectile_x = this.original_pos_x;
-        this.projectile_y = 550;
+        this.projectile_y = game.height - 30;
       //  this.speed = 150; //if decrese speed increese
         this.bool_hit = false;
         this.enemy_x = 30;

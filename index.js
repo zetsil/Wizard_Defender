@@ -16,6 +16,8 @@ document.getElementById("fire").addEventListener("click",startFire);
 document.getElementById("archer").addEventListener("click",addArcher);
 document.getElementById("gold_cart").addEventListener("click",addCart);
 document.getElementById("solider").addEventListener("click",addSolider);
+document.getElementById("bomb").addEventListener("click",startBomb);
+
 
 
 
@@ -23,6 +25,8 @@ document.getElementById("archer_speed").addEventListener("click",incresArcherSpe
 document.getElementById("rain_cost_decrees_button").addEventListener("click",rainCost);
 document.getElementById("snow_cost_decrees_button").addEventListener("click",snowCost);
 document.getElementById("gold_cart_increase_button").addEventListener("click",cartSpeed);
+
+
 
 
 
@@ -59,8 +63,9 @@ window.onclick = function(event) {
   }}
 
 
-
  function startGame(){
+
+
      if(game)
         return;
     let startScreen = document.getElementById("start-screen");
@@ -68,11 +73,17 @@ window.onclick = function(event) {
     let rain_space = document.getElementById("rain");
     let snow_space = document.getElementById("snow");
     let fire_space =  document.getElementById("fire");
-    
+    let bomb =  document.getElementById("bomb");
+
+
+
+
+
     mana_space.style.visibility="visible";
     rain_space.style.visibility="visible";
     snow_space.style.visibility="visible";
     fire_space.style.visibility="visible";
+    bomb.style.visibility="visible";
     startScreen.style.visibility='hidden';
 
     var popup = document.getElementById("myPopup");
@@ -89,23 +100,74 @@ window.onclick = function(event) {
 
     var canvas = document.getElementById("gameScreen");
     let ctx = canvas.getContext("2d");
+    var table_r = document.getElementById("table_r");
+
+
+    let width = screen.width;
+    let height = screen.height;
+
+    if(window.innerHeight > window.innerWidth) {
+      height = screen.width;
+      width = screen.height;
+      popup.innerHTML = "please use landscape mode !";
+    } else {
+       width = screen.width;
+       height = screen.height;
+    }
+
+    if (width < 1025 )
+    {
+       canvas.style.width = String(width - 220 + "px");
+       canvas.style.height = String(height - 30 + "px");
+
+       canvas.width = width - 220 ;
+       canvas.height = height - 30;
+
+       mana_space.style.width = "60%";
+       rain_space.style.width = "60%";
+       bomb.style.width = "60%";
+       snow_space.style.width = "60%";
+       fire_space.style.width = "60%";
+       btn.style.width = "80%";
+
+       document.getElementById("rain").style.width = "60%";
+       document.getElementById("snow").style.width = "60%";
+       document.getElementById("fire").style.width = "60%";
+       document.getElementById("archer").style.width = "60%";
+       document.getElementById("gold_cart").style.width = "60%";
+       document.getElementById("solider").style.width = "60%";
+       document.getElementById("bomb").style.width = "60%";
+       document.getElementById("gold_space").style.width = "60%";
+
+       let bomb_nr = document.getElementById("bomb_number");
+       bomb_nr.style.fontSize = "20px";
+
+
+
+      // table_r.style.height = String(canvas.height + "px");
+    }else{
+      canvas.style.width="800px"
+      canvas.width = 800;
+    }
+
+
+   
 
 
 
 
-
-
-
-   game = new Game(ctx);
+   game = new Game(ctx,canvas.width,canvas.height);
   
 
    game.gameLoop();
 
     canvas.onclick = (e) => {
-        let x = e.offsetX;
-        let y = e.offsetY;
+        
+      var rect = canvas.getBoundingClientRect(), /// get absolute rect. of canvas
+      x = e.clientX - rect.left,         /// adjust for x
+      y = e.clientY - rect.top;          /// adjust for y
 
-        game.checkClickedObject(x,y);
+      game.checkClickedObject(x,y);
 
     }
 
@@ -193,4 +255,9 @@ function snowCost(){
 function cartSpeed(){
   if (typeof game != "undefined")
       game.increase_gold_cart_speed();
+}
+
+function startBomb(){
+  if (typeof game != "undefined")
+     game.bombExplode();
 }

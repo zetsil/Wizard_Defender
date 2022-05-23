@@ -8,6 +8,12 @@ body {
     background-color:#04131D;
     font-family: Arial;
 }
+
+img:active{
+  transform:scale(1.2);
+  box-shadow:2px 2px 10px rgba(0,0,0,0.3);
+}
+
 /* Three image containers (use 25% for four, and 50% for two, etc) */
 
   
@@ -18,8 +24,10 @@ body {
     display: table;
 }
 
+
 table, th {
   border: 1px solid black;
+  position: relative;  
 }
 
 .rightAlign{

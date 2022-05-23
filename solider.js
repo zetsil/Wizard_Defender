@@ -8,8 +8,12 @@ export default class Solider{
       this.skeleton_image.src = 'assets/solider_animation.png';
       this.Width = 35;
       this.Height = 50;
-      this.pos_x = Solider.start_x;
-      this.pos_y = 530;
+     // this.pos_x = Solider.start_x;
+      this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+      if( this.pos_x  >= game.width)
+        this.pos_x = game.width - 30;
+      this.pos_y = game.height - 70;
+      //this.pos_y = 530;
       this.speed = 15;
   
       this.frameX = 0;
@@ -49,7 +53,7 @@ export default class Solider{
   update(deltaTime){
       if(!deltaTime) 
         return;
-      if(this.pos_x > 790){
+        if(this.pos_x > (this.game.width -15)){
           this.speed = -this.speed;
       }
       else if(this.pos_x  < 0 )

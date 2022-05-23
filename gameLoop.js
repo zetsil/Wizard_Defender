@@ -5,17 +5,27 @@ import Ally from "./ally.js";
 import GoldCart from "./gold_cart.js";
 import Solider from "./solider.js";
 import FireWall from "./fireWall.js";
+import Explosion from "./explosion.js";
 export default class Game{
 
-    constructor(ctx){
+    constructor(ctx,w,h){
 
         this.audio = new Audio("assets/8_bit_boss_battle_4_by_eliteferrex.mp3");
         this.audio.volume = 0.3;
+        this.explosion_sound = new Audio("assets/mixkit-explosion-spell.wav")
+        this.coin_sound = new Audio("assets/RetroPickUpCoin.wav")
+        this.coin_sound.volume = 0.1;
+        this.explosion_sound.volume = 0.3;
+        this.charge_mana = new Audio("assets/RetroChargeMagic.wav");
+        this.charge_mana.volume = 0.1;
+        this.draw_explosion = false;
        // this.audio.play();
-        this.width = 800;
-        this.height = 600;
+        this.width = w;
+        this.height = h;
         this.ctx = ctx;
         this.lastTime = 0;
+        this.explosion = new Explosion(this);
+
 
         this.flame_wall_audio = new Audio("assets/Flame Arrow.mp3")
 
@@ -91,6 +101,19 @@ export default class Game{
         lvl8.createWaves(8);
         this.Levels.push(lvl8);
 
+        var lvl9 =  new Level(this);
+        lvl9.createWaves(9);
+        this.Levels.push(lvl9);
+
+
+        var lvl10 =  new Level(this);
+        lvl10.createWaves(10);
+        this.Levels.push(lvl10);
+
+        var lvl11 =  new Level(this);
+        lvl11.createWaves(11);
+        this.Levels.push(lvl11);
+
 
 
 
@@ -102,7 +125,7 @@ export default class Game{
         this.rain_cost = 6;
         this.archer_speed_cost = 10;
 
-        this.solider_cost = 320;
+        this.solider_cost = 60;
         this.solider_number = 0;
         this.max_solider = 4;
 
@@ -115,6 +138,7 @@ export default class Game{
         this.rain_cost_D = 250;
         this.snow_cost = 15;
         this.snow_cost_decreasee = 650;
+        this.bomb_numbers = 3;
 
 
         this.fire_cost = 20;
@@ -135,8 +159,8 @@ export default class Game{
 
         // this.interval --> interval created
 
-        this.mana = 0;
-        this.gold =5000;
+        this.mana = 20;
+        this.gold =150;
 
         this.cast_rain = false;
         this.cast_snow = false;
@@ -148,6 +172,7 @@ export default class Game{
 
 
     }
+
 
     create_20_random_waves(){
         for(let i = 0 ;i<20;i++)
@@ -167,7 +192,7 @@ export default class Game{
         this.ctx.lineCap = 'round';
 
         var init = [];
-        var maxParts = 2800;
+        var maxParts = 500;
         for(var a = 0; a < maxParts; a++) {
           init.push({
             x: Math.random() * this.width,
@@ -381,8 +406,10 @@ export default class Game{
            this.draw_R(); // draw rain
         if(!this.cast_fire && !this.cast_rain && this.cast_snow) 
            this.draw_snow(); // draw snow  
-        if(this.cast_fire && !this.cast_snow && !this.cast_rain) 
+        if(this.cast_fire) 
            this.draw_fire(deltaTime); // draw fire     
+        if(this.draw_explosion)
+           this.explosion.draw(deltaTime);   
         
     
            
@@ -445,13 +472,13 @@ export default class Game{
         this.ctx.fillText(String(length), 0, 30);
         
         this.ctx.fillStyle = "red";
-        this.ctx.fillText(String(this.current_level.escapedEnemys), 750, 30);
+        this.ctx.fillText(String(this.current_level.escapedEnemys), this.width - 30, 30);
 
         this.ctx.fillStyle = "blue";
-        this.ctx.fillText(String(this.mana) + "/20", 270, 30);
+        this.ctx.fillText(String(this.mana) + "/20", this.width/2 -120, 30);
 
         this.ctx.fillStyle = "yellow";
-        this.ctx.fillText(String(this.gold), 400, 30);
+        this.ctx.fillText(String(this.gold), this.width/2  , 30);
 
         if(this.current_level.game_over)
         {
@@ -464,8 +491,10 @@ export default class Game{
            if(this.Levels.length <= (this.level_count + 1))
              return;
            this.level_count++;
-           if(this.level_count % 2 == 0)
+           if(this.level_count % 2 == 0 &&  this.level_count < 15)
              Enemy.up_speedd();
+           if(this.level_count % 5 == 0 &&  this.level_count < 15)
+             Enemy.gold_up++;  
            this.current_level = this.Levels[this.level_count];
 
         }
@@ -476,7 +505,9 @@ export default class Game{
     increaseMana()
     {   
        var me = this; 
-       this.intervalM = setInterval(function(){me.increaseM();},800);//create interval
+       this.intervalM = setInterval(function(){me.increaseM();
+    me.charge_mana.play();
+    },800);//create interval
     }
 
     increaseM(){
@@ -491,7 +522,9 @@ export default class Game{
     increaseGold()
     {   
        var me = this; 
-       this.intervalG = setInterval(function(){me.increaseG();},500);
+       this.intervalG = setInterval(function(){me.increaseG();
+       me.coin_sound.play();
+    },500);
     }
 
     increaseG(){
@@ -564,7 +597,7 @@ export default class Game{
       if(this.gold >= this.cart_speed_cost)
       {
          GoldCart.SPEED += 5;
-         GoldCart.CAPACITY += GoldCart.CAPACITY;
+         GoldCart.CAPACITY += 2;
          this.gold -= this.cart_speed_cost;
          this.cart_speed_cost += Math. round(this.cart_speed_cost / 2);
          var cost = document.getElementById("gold_cart_increase");
@@ -608,10 +641,36 @@ export default class Game{
     gameOver(){
         this.current_level.gameOver();
         this.ctx.fillStyle = "red";
-        this.ctx.fillText("Game Over!", 320, 300);
+        this.ctx.fillText("Game Over!", this.width/2, this.height/2);
         
         this.mana = 0;
 
     }
+
+    bombExplode()
+    {
+        if(this.bomb_numbers > 0)//daca numarul de bombe e mai mic de cat 3
+        {
+           this.bomb_numbers--;//scade o bomba
+        this.explosion_sound.play();  
+        this.draw_explosion = true;
+        var bomb_text = document.getElementById("bomb_number");
+        bomb_text.innerHTML = String(this.bomb_numbers);//schimba numarul bombelor in html
+        var me = this;
+        setTimeout(function(){me.draw_explosion = false},400);//deseneaza explozia doar 400ms
+        var wv = this.current_level.wave;
+
+        wv.forEach((enemy,i) =>{
+        if (enemy.created)
+             { 
+                 enemy.instaKill() ;
+                    
+             }   
+
+    })
+
+       }
+
+}
 
 }

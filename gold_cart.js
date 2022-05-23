@@ -7,8 +7,8 @@ export default class GoldCart{
     this.skeleton_image.src = 'assets/gold_cart.png';
     this.Width = 48;
     this.Height = 42;
-    this.pos_x = Math.floor(Math.random() * 700);
-    this.pos_y = 565;
+    this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+    this.pos_y = game.height - 80;
     this.speed = 15;
 
     this.frameX = 0;
@@ -45,7 +45,7 @@ export default class GoldCart{
 update(deltaTime){
     if(!deltaTime) 
       return;
-    if(this.pos_x > 790){
+      if(this.pos_x > (this.game.width -15)){
         this.invers = -this.invers;
         this.game.gold += 8 + GoldCart.CAPACITY;
     }
