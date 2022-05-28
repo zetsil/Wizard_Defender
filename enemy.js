@@ -8,9 +8,10 @@ export default class Enemy
         this.skeleton_image.src = 'assets/skeleton_animation.png';
         this.Width = 24;
         this.Height = 31;
+        this.type = "enemy";
         this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
         if( this.pos_x  >= game.width)
-          this.pos_x = game.width - 30;
+          this.pos_x = game.width - this.Width - 10;
         this.pos_y = 0;
 
         this.frameX = 0;
@@ -79,7 +80,7 @@ export default class Enemy
         if(!this.kill && this.created && this.alive)
           this.ctx.drawImage(this.skeleton_image,this.frameX * this.Width,0,this.Width,this.Height,this.pos_x,this.pos_y,this.Width,this.Height);
         else{
-        this.pos_x =Math.abs(Math.floor(Math.random() *  this.game.width) - 10);
+        this.pos_x =Math.abs(Math.floor(Math.random() *  (this.game.width - this.Width)));
         this.pos_y = 0;
         this.kill = false;
         }

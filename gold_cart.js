@@ -5,11 +5,16 @@ export default class GoldCart{
     this.ctx = game.ctx;
     this.skeleton_image = new Image();
     this.skeleton_image.src = 'assets/gold_cart.png';
+    this.sound = new Audio("assets/RetroPickUpCoin.wav")
+    this.sound.volume = 0.2;
     this.Width = 48;
     this.Height = 42;
     this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
     this.pos_y = game.height - 80;
     this.speed = 15;
+
+    this.freez_state = false;
+    this.start_freez = false;
 
     this.frameX = 0;
     this.max_frame = 0;
@@ -45,12 +50,16 @@ export default class GoldCart{
 update(deltaTime){
     if(!deltaTime) 
       return;
+    if(this.freez_state == true)
+      return;    
       if(this.pos_x > (this.game.width -15)){
+        this.pos_x = (this.game.width -15);
+        this.sound.play();
         this.invers = -this.invers;
         this.game.gold += 8 + GoldCart.CAPACITY;
     }
     else if(this.pos_x  < 0 )
-    this.invers = Math.abs(this.invers);    
+      this.invers = Math.abs(this.invers);    
            
     this.pos_x += this.invers * (this.speed + GoldCart.SPEED) / deltaTime;
 }

@@ -6,6 +6,7 @@ import GoldCart from "./gold_cart.js";
 import Solider from "./solider.js";
 import FireWall from "./fireWall.js";
 import Explosion from "./explosion.js";
+import Viking from "./viking.js";
 export default class Game{
 
     constructor(ctx,w,h){
@@ -114,6 +115,39 @@ export default class Game{
         lvl11.createWaves(11);
         this.Levels.push(lvl11);
 
+        var lvl12 =  new Level(this);
+        lvl12.createWaves(12);
+        this.Levels.push(lvl12);
+
+        var lvl13 =  new Level(this);
+        lvl13.createWaves(13);
+        this.Levels.push(lvl13);
+
+        var lvl14 =  new Level(this);
+        lvl14.createWaves(14);
+        this.Levels.push(lvl14);
+
+
+        var lvl15 =  new Level(this);
+        lvl15.createWaves(15);
+        this.Levels.push(lvl15);
+
+        var lvl16 =  new Level(this);
+        lvl16.createWaves(16);
+        this.Levels.push(lvl16);
+
+        var lvl17 =  new Level(this);
+        lvl17.createWaves(17);
+        this.Levels.push(lvl17);
+
+        var lvl18 =  new Level(this);
+        lvl18.createWaves(18);
+        this.Levels.push(lvl18);
+
+        var lvl19 =  new Level(this);
+        lvl19.createWaves(19);
+        this.Levels.push(lvl19);
+
 
 
 
@@ -128,6 +162,10 @@ export default class Game{
         this.solider_cost = 60;
         this.solider_number = 0;
         this.max_solider = 4;
+
+        this.viking_cost = 1500;
+        this.max_viking = 2;
+        this.viking_number = 0;
 
         this.cart_cost = 70;
         this.cart_number = 0;
@@ -469,13 +507,13 @@ export default class Game{
 
         this.ctx.fillStyle = "grey";
         this.ctx.font = '48px serif';
-        this.ctx.fillText(String(length), 0, 30);
+        this.ctx.fillText(String(this.current_level.enemys), 0, 30);
         
         this.ctx.fillStyle = "red";
-        this.ctx.fillText(String(this.current_level.escapedEnemys), this.width - 30, 30);
+        this.ctx.fillText(String(this.escapedEnemys), this.width - 30, 30);
 
         this.ctx.fillStyle = "blue";
-        this.ctx.fillText(String(this.mana) + "/20", this.width/2 -120, 30);
+        this.ctx.fillText(String(this.mana) + "/20", this.width/2 -150, 30);
 
         this.ctx.fillStyle = "yellow";
         this.ctx.fillText(String(this.gold), this.width/2  , 30);
@@ -486,7 +524,7 @@ export default class Game{
         }
 
 
-        if(length == 0){
+        if(this.current_level.enemys <= 0){
            //this.audio.pause();
            if(this.Levels.length <= (this.level_count + 1))
              return;
@@ -581,6 +619,21 @@ export default class Game{
         }
            
     }
+
+    addViking(){
+        if(this.gold >= this.viking_cost && this.viking_number < this.max_viking ){
+        var cost = document.getElementById("viking_cost");
+
+        var new_viking = new Viking(this);
+        this.allys.push(new_viking);
+        this.gold -= this.viking_cost;
+        this.viking_cost +=  this.viking_cost;
+        cost.innerHTML = this.viking_cost;
+        this.viking_number++;
+
+        }
+           
+    }
     incresArcherSpeed(){
         if(this.gold >= this.archer_speed_cost)
         {
@@ -641,7 +694,7 @@ export default class Game{
     gameOver(){
         this.current_level.gameOver();
         this.ctx.fillStyle = "red";
-        this.ctx.fillText("Game Over!", this.width/2, this.height/2);
+        this.ctx.fillText("Game Over!", this.width/2-50, this.height/2);
         
         this.mana = 0;
 

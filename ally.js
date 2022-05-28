@@ -36,6 +36,7 @@ export default class Ally{
         this.shoot = true;
 
 
+
         this.original_pos_x = 0;
         this.projectile = new Projectile(this.game,this.original_pos_x); 
 
@@ -71,6 +72,8 @@ export default class Ally{
     update(deltaTime){
         if(!deltaTime) 
           return;
+        if(this.freez_state == true)
+            return;  
         if(this.pos_x > (this.game.width -20)){
             this.speed = -this.speed;
         }

@@ -15,6 +15,9 @@ export default class Solider{
       this.pos_y = game.height - 70;
       //this.pos_y = 530;
       this.speed = 15;
+
+      this.freez_state = false;
+      this.start_freez = false;
   
       this.frameX = 0;
       this.max_frame = 4;
@@ -53,6 +56,8 @@ export default class Solider{
   update(deltaTime){
       if(!deltaTime) 
         return;
+      if(this.freez_state == true)
+        return;    
         if(this.pos_x > (this.game.width -15)){
           this.speed = -this.speed;
       }

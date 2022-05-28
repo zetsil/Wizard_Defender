@@ -16,6 +16,8 @@ document.getElementById("fire").addEventListener("click",startFire);
 document.getElementById("archer").addEventListener("click",addArcher);
 document.getElementById("gold_cart").addEventListener("click",addCart);
 document.getElementById("solider").addEventListener("click",addSolider);
+document.getElementById("viking").addEventListener("click",addViking);
+
 document.getElementById("bomb").addEventListener("click",startBomb);
 
 
@@ -86,14 +88,14 @@ window.onclick = function(event) {
     bomb.style.visibility="visible";
     startScreen.style.visibility='hidden';
 
-    var popup = document.getElementById("myPopup");
-    popup.innerHTML = "<----Use blue space to regenerate mana";
+    // var popup = document.getElementById("myPopup");
+    // popup.innerHTML = "<----Use blue space to regenerate mana";
 
-    popup.classList.toggle("show");
-    popup.style.opacity = (popup.style.opacity == 1) ? 0 : 1;   
+    // popup.classList.toggle("show");
+    // popup.style.opacity = (popup.style.opacity == 1) ? 0 : 1;   
 
     
-    setTimeout(function(){popup.classList.toggle("hide");},7000);
+    // setTimeout(function(){popup.classList.toggle("hide");},7000);
 
 
 
@@ -234,6 +236,11 @@ function addCart(){
 function addSolider(){
   if (typeof game != "undefined")
       game.addSolider();
+}
+
+function addViking(){
+  if (typeof game != 'undefined')
+     game.addViking();
 }
 
 

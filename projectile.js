@@ -102,9 +102,10 @@ export default class Projectile
 
         if(this.projectile_y < this.enemy_y && this.enemy_bounce == false)
             this.destroyed = true;
-        else if((this.projectile_y > 600 || this.projectile_x < 0 ||  this.projectile_x > 600)&& this.enemy_bounce == true){
-            this.destroyed = true;
-        }
+        else if((this.projectile_y < 0 || this.projectile_y > this.game.Height || this.projectile_x < 0 ||  this.projectile_x > this.game.Width)){
+                this.destroyed = true;    }
+
+        
         
     
 

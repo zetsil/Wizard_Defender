@@ -34,7 +34,11 @@ export default class IceProjectile
         if (Math.pow(this.projectile_x - enemy.pos_x - enemy.Width/2,2) + Math.pow(this.projectile_y - enemy.pos_y - enemy.Height/2,2) < Math.pow(enemy.Height,2))
              { 
                    console.log("hit!");
-                  // this.bool_hit = true;
+                   if(enemy.freez_state == false){
+                     enemy.freez_state = true;
+                     setTimeout(function(){enemy.freez_state = false;},3000);
+                   }
+                
                    this.destroyed = true;
 
              }

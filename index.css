@@ -163,7 +163,7 @@ canvas {
 
   .popup .hide {
     visibility: visible;
-    -webkit-animation: fadeOut 1s forwards;
+    -webkit-animation: fadeOut 1s ;
     animation: fadeOut 1s;
     animation-fill-mode: forwards;
   }

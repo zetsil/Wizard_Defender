@@ -10,7 +10,6 @@ constructor(game,solider_x,solider_y){
     this.Height = 65;
     this.pos_x = solider_x
     this.pos_y = solider_y - 40;
-    this.speed = 15;
 
     this.frameX = 0;
     this.max_frame = 4;
