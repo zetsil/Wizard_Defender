@@ -150,6 +150,42 @@ export default class Game{
 
 
 
+        var lvl20 =  new Level(this);
+        lvl20.createWaves(20);
+        this.Levels.push(lvl20);
+
+        var lvl21 =  new Level(this);
+        lvl21.createWaves(21);
+        this.Levels.push(lvl21);
+
+        var lvl22 =  new Level(this);
+        lvl22.createWaves(22);
+        this.Levels.push(lvl22);
+
+        var lvl23 =  new Level(this);
+        lvl23.createWaves(23);
+        this.Levels.push(lvl23);
+
+        var lvl24 =  new Level(this);
+        lvl24.createWaves(24);
+        this.Levels.push(lvl24);
+
+
+        var lvl25 =  new Level(this);
+        lvl25.createWaves(25);
+        this.Levels.push(lvl25);
+
+        var lvl26 =  new Level(this);
+        lvl26.createWaves(26);
+        this.Levels.push(lvl26);
+
+        var lvl27 =  new Level(this);
+        lvl27.createWaves(27);
+        this.Levels.push(lvl27);
+
+
+
+
 
         this.allys = [];
 
@@ -169,7 +205,7 @@ export default class Game{
 
         this.cart_cost = 70;
         this.cart_number = 0;
-        this.max_cart = 4;
+        this.max_cart = 6;
         this.cart_speed_cost = 30;
 
         this.max_rain = 3;
@@ -506,17 +542,17 @@ export default class Game{
         
 
         this.ctx.fillStyle = "grey";
-        this.ctx.font = '48px serif';
-        this.ctx.fillText(String(this.current_level.enemys), 0, 30);
+        this.ctx.font = '20px serif';
+        this.ctx.fillText(String(this.current_level.enemys), 0, 15);
         
         this.ctx.fillStyle = "red";
-        this.ctx.fillText(String(this.escapedEnemys), this.width - 30, 30);
+        this.ctx.fillText(String(this.escapedEnemys), this.width - 30, 15);
 
         this.ctx.fillStyle = "blue";
-        this.ctx.fillText(String(this.mana) + "/20", this.width/2 -150, 30);
+        this.ctx.fillText(String(this.mana) + "/20", this.width/2 -150, 15);
 
         this.ctx.fillStyle = "yellow";
-        this.ctx.fillText(String(this.gold), this.width/2  , 30);
+        this.ctx.fillText(String(this.gold), this.width/2 + 10  , 15);
 
         if(this.current_level.game_over)
         {
@@ -526,8 +562,12 @@ export default class Game{
 
         if(this.current_level.enemys <= 0){
            //this.audio.pause();
-           if(this.Levels.length <= (this.level_count + 1))
+           if( this.Levels.length <= (this.level_count + 1)){
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("Thank You for Playing!", this.width/4  , this.height/2);
+            this.ctx.fillText("You Finish the Game!", this.width/4  , this.height/2+100);
              return;
+            }
            this.level_count++;
            if(this.level_count % 2 == 0 &&  this.level_count < 15)
              Enemy.up_speedd();
@@ -574,6 +614,7 @@ export default class Game{
     }
 
     addCart(){
+
         if(this.gold >= this.cart_cost && this.cart_number < this.max_cart ){
         var cost = document.getElementById("gold_cart_cost");
 
@@ -585,6 +626,13 @@ export default class Game{
         this.cart_number++;
 
         }
+        if(this.cart_number == this.max_cart)
+        {
+            var cost = document.getElementById("gold_cart_cost");
+            cost.innerHTML = "maxed out";
+
+        }
+          
            
     }
 
@@ -599,6 +647,12 @@ export default class Game{
         this.archer_cost +=  this.archer_cost;
         cost.innerHTML = this.archer_cost;
         this.archer_number++;
+
+        }
+        if(this.archer_number == this.max_archer)
+        {
+            var cost = document.getElementById("archer_cost");
+            cost.innerHTML = "maxed out";
 
         }
            
@@ -617,6 +671,12 @@ export default class Game{
         this.solider_number++;
 
         }
+        if(this.solider_number == this.max_solider)
+        {
+            var cost = document.getElementById("solider_cost");
+            cost.innerHTML = "maxed out";
+
+        }
            
     }
 
@@ -630,6 +690,12 @@ export default class Game{
         this.viking_cost +=  this.viking_cost;
         cost.innerHTML = this.viking_cost;
         this.viking_number++;
+
+        }
+        if(this.viking_number == this.max_viking)
+        {
+            var cost = document.getElementById("viking_cost");
+            cost.innerHTML = "maxed out";
 
         }
            

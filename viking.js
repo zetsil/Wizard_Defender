@@ -99,6 +99,11 @@ export default class Viking extends Solider{
             {
             this.pos_x  += (1 +(this.enemy_x   - this.original_pos_x ) )  / ( deltaTime + this.speed) ;
             this.pos_y += (1 + (this.enemy_y + this.chosen_enemy.speed + 30  - this.original_pos_y  ) )    / (deltaTime + this.speed) ;
+            }else{
+                this.choseTarget(); 
+               this.target_chose =  true;
+               this.original_pos_x = this.pos_x;
+               this.original_pos_y = this.pos_y;
             }
     }
 

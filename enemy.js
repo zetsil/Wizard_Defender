@@ -9,10 +9,10 @@ export default class Enemy
         this.Width = 24;
         this.Height = 31;
         this.type = "enemy";
-        this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+        this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 20;
         if( this.pos_x  >= game.width)
           this.pos_x = game.width - this.Width - 10;
-        this.pos_y = 0;
+        this.pos_y = 20;
 
         this.frameX = 0;
         this.max_frame = 4;
@@ -100,7 +100,7 @@ export default class Enemy
        this.speed +=2;
        this.health -= 1;
 
-       if(this.health <= 0){
+       if(this.health == 0){
           this.speed = -20;
           var me = this;
           setTimeout(function(){me.alive = false;},500);

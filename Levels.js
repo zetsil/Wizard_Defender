@@ -130,7 +130,7 @@ export default class Level{
     }
 
     randomWave(){
-            let random_nr = Math.floor(Math.random() * 50);
+            let random_nr = Math.floor(Math.random() * 50)+10;
             for(let i = 0;i<random_nr;i++){
                 let random = Math.floor(Math.random() * 3);
                 var sk = new Enemy(this.game);
@@ -139,7 +139,7 @@ export default class Level{
                 else if(random == 1)
                   sk = new Creepe(this.game);
                 else if (random == 2)
-                  sk = new FiereEntity(this.game);   
+                  sk = new IceCreep(this.game);   
                 sk.time_of_arivel = i / 10 + 0.3 ;  
                 this.enemys++;
                 this.wave.push(sk);

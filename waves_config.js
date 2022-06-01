@@ -24,7 +24,7 @@ WAVES :{ "WV" : [
 },
 
 {
-  "enemys" :[ {"type": 'skeleton',"arive" : 1,"amont" : 12} , {"type": 'creep',"arive" : 9,"amont" : 8},{"type": 'coin',"arive" : 10,"amont" : 1},{"type": 'coin',"arive" : 5,"amont" : 2}]
+  "enemys" :[{"type": 'message', "txt" : 'don\'t forget to buy upgrades!'}, {"type": 'skeleton',"arive" : 1,"amont" : 12} , {"type": 'creep',"arive" : 9,"amont" : 8},{"type": 'coin',"arive" : 10,"amont" : 1},{"type": 'coin',"arive" : 5,"amont" : 2}]
 },
 
 {
@@ -131,6 +131,65 @@ WAVES :{ "WV" : [
 {
   "enemys" :[ {"type": 'knight',"arive" : 2,"amont" : 5} , {"type": 'fire',"arive" : 7,"amont" : 4} , {"type": 'fire',"arive" : 8,"amont" : 8} ,
   {"type": 'ice',"arive" : 4,"amont" : 11},{"type": 'fire',"arive" : 4,"amont" : 4},{"type": 'collect',"arive" : 3,"amont" : 2}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 2,"amont" : 5} , {"type": 'ice',"arive" : 7,"amont" : 4} , {"type": 'ice',"arive" : 8,"amont" : 8} ,
+  {"type": 'creep',"arive" : 4,"amont" : 20},{"type": 'skeleton',"arive" : 4,"amont" : 4},{"type": 'collect',"arive" : 3,"amont" : 2}
+]
+},
+
+
+{
+  "enemys" :[{"type": 'coin',"arive" : 3,"amont" : 2},{"type": 'coin',"arive" : 1,"amont" : 4},{"type": 'coin',"arive" : 2,"amont" : 2}
+]
+},
+
+{
+  "enemys" :[ {"type": 'knight',"arive" : 2,"amont" : 4} , {"type": 'skeleton',"arive" : 3,"amont" : 12} , {"type": 'skeleton',"arive" : 8,"amont" : 7} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 10}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'skeleton',"arive" : 2,"amont" : 20} , {"type": 'skeleton',"arive" : 3,"amont" : 12} , {"type": 'skeleton',"arive" : 8,"amont" : 7} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 10}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'ice',"arive" : 2,"amont" : 9} , {"type": 'skeleton',"arive" : 3,"amont" : 10} , {"type": 'knight',"arive" : 8,"amont" : 7} ,
+  {"type": 'skeleton',"arive" : 4,"amont" : 10}
+]
+},
+
+
+{
+  "enemys" :[ {"type": 'ice',"arive" : 1,"amont" : 8} , {"type": 'creep',"arive" : 3,"amont" : 4},
+  {"type": 'creep',"arive" : 4.10,"amont" : 5} , {"type": 'creep',"skeleton" : 2.70,"amont" : 9}
+]
+},
+
+
+{
+  "enemys" :[  {"type": 'knight',"arive" : 1,"amont" : 4} , {"type": 'skeleton',"arive" : 3,"amont" : 10} , {"type": 'skeleton',"arive" : 5,"amont" : 9} ,
+  {"type": 'skeleton',"arive" : 6,"amont" : 7},{"type": 'knight',"arive" : 12,"amont" : 2},{"type": 'collect',"arive" : 1,"amont" : 1},{"type": 'coin',"arive" : 9,"amont" : 2}
+]
+},
+
+
+{
+  "enemys" :[  {"type": 'skeleton',"arive" : 1,"amont" : 40} , {"type": 'ice',"arive" : 3,"amont" : 10} , {"type": 'knight',"arive" : 5,"amont" : 3} ,
+]
+},
+
+
+{
+  "enemys" :[  {"type": 'knight',"arive" : 1,"amont" : 12} , {"type": 'ice',"arive" : 3,"amont" : 4} ,{"type": 'collect',"arive" : 3,"amont" : 2} 
 ]
 },
 

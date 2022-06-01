@@ -9,7 +9,7 @@ export default class Solider{
       this.Width = 35;
       this.Height = 50;
      // this.pos_x = Solider.start_x;
-      this.pos_x = Math.floor(Math.random() * (game.width - 50))+ 10;
+      this.pos_x = Math.floor(Math.random() * (game.width - 50));
       if( this.pos_x  >= game.width)
         this.pos_x = game.width - 30;
       this.pos_y = game.height - 70;
@@ -60,6 +60,7 @@ export default class Solider{
         return;    
         if(this.pos_x > (this.game.width -15)){
           this.speed = -this.speed;
+          this.pos_x = (this.game.width -15);
       }
       else if(this.pos_x  < 0 )
           this.speed = Math.abs(this.speed);  

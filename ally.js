@@ -76,6 +76,7 @@ export default class Ally{
             return;  
         if(this.pos_x > (this.game.width -20)){
             this.speed = -this.speed;
+            this.pos_x  =this.game.width -20;
         }
         else if(this.pos_x  < 0 )
             this.speed = Math.abs(this.speed);    

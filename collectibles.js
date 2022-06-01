@@ -81,6 +81,7 @@ export default class Collectibles{
     }
 
     hit(){
+      if(this.kill == false){
         this.kill = true;
         this.health = 0;
         this.speed = -20;
@@ -89,7 +90,11 @@ export default class Collectibles{
         setTimeout(function(){me.alive = false;},700);
         this.game.gold += this.gold ;
         this.game.mana += this.mana;
+      }
  
+     }
+     instaKill(){
+
      }
 
      update(deltaTime){

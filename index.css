@@ -65,11 +65,11 @@ table, th {
     text-align: center;
 }
 canvas {
-   border: 3px solid #000000;
-   /* background-image:    url(assets/background.png);
+   border: 0px solid #000000;
+   background-image:    url(assets/background.png);
    background-size:     cover;                      
    background-repeat:   no-repeat;
-   background-position: center center; */
+   /* background-position: center center; */
 }
 
 /* Container holding the image and the text */

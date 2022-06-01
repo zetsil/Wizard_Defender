@@ -1,7 +1,7 @@
 import Game from "./gameLoop.js"
 console.log("start game!");
 
-document.getElementById("myBtn").addEventListener("click", startGame);
+document.getElementById("myBtn").addEventListener("click", preloadGame);
 
 //mana event listenet
 document.getElementById("mana_space").addEventListener("mouseenter",increaseMana);
@@ -29,10 +29,44 @@ document.getElementById("snow_cost_decrees_button").addEventListener("click",sno
 document.getElementById("gold_cart_increase_button").addEventListener("click",cartSpeed);
 
 
+const assets = [
+  "assets/RetroPickUpCoin.wav",
+  "assets/RetroChargeMagic.wav",
+  "assets/mixkit-explosion-spell.wav",
+  "assets/archer_1.mp3",
+  "assets/archer_2.mp3",
+  "assets/archer_3.mp3",
+  "assets/archer_4.mp3",
+  "assets/archer_5.mp3",
+  "assets/archere_animation.png",
+  "assets/solider_animation.png",
+  "assets/gold_cart.png",
+  "assets/game_hit_sound_effect.mp3",
+];
 
 
+const assetsLoaded = assets.map(url =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    const sound = new Audio();
 
-
+    const extension =url.split('.').pop();
+    if(extension == "mp3" || extension == "wav")
+    {
+      console.log("heloo frome here");
+      sound.onerror = e => reject(`${url} failed to load`);
+      sound.onload = e => resolve(img);
+      sound.src = url;
+    }else
+    {
+      console.log("heloo");
+      img.onerror = e => reject(`${url} failed to load`);
+      img.onload = e => resolve(img);
+      img.src = url;
+    }  
+    
+  })
+);
 
 
 var game;
@@ -63,6 +97,15 @@ window.onclick = function(event) {
     modal.style.display = "none";
     game.un_pause();
   }}
+
+
+  function preloadGame(){
+    Promise
+  .all(assetsLoaded)
+  .then(startGame())
+  .catch(err => console.error(err))
+;
+  }
 
 
  function startGame(){
