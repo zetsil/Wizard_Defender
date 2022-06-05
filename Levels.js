@@ -131,7 +131,7 @@ export default class Level{
 
     randomWave(){
             let random_nr = Math.floor(Math.random() * 50)+10;
-            for(let i = 0;i<random_nr;i++){
+            for(let i = 0;i<random_nr-5;i++){
                 let random = Math.floor(Math.random() * 3);
                 var sk = new Enemy(this.game);
                 if(random == 0)
@@ -144,6 +144,18 @@ export default class Level{
                 this.enemys++;
                 this.wave.push(sk);
 
+            }for(let i = 0;i<5;i++){
+              let random = Math.floor(Math.random() * 3);
+              var sk = new Enemy(this.game);
+              if(random == 0)
+                sk = new EvilKnight(this.game);
+              else if(random == 1)
+                sk = new Creepe(this.game);
+              else if (random == 2)
+                sk = new IceCreep(this.game);   
+              sk.time_of_arivel = i / 10 + 0.3 ;  
+              this.enemys++;
+              this.wave.push(sk);
             }
         }
     gameOver(){

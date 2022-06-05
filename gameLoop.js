@@ -7,6 +7,7 @@ import Solider from "./solider.js";
 import FireWall from "./fireWall.js";
 import Explosion from "./explosion.js";
 import Viking from "./viking.js";
+import WizardAlly from "./wizard_ally.js";
 export default class Game{
 
     constructor(ctx,w,h){
@@ -193,7 +194,10 @@ export default class Game{
         this.max_archer = 10;
         this.archer_cost = 5;
         this.rain_cost = 6;
+
         this.archer_speed_cost = 10;
+        this.current_archer_update = 0;
+        this.max_archer_speed = 9;
 
         this.solider_cost = 60;
         this.solider_number = 0;
@@ -202,6 +206,9 @@ export default class Game{
         this.viking_cost = 1500;
         this.max_viking = 2;
         this.viking_number = 0;
+
+        this.wizard_cost = 5500;
+        this.wizard_number = 0;
 
         this.cart_cost = 70;
         this.cart_number = 0;
@@ -234,7 +241,10 @@ export default class Game{
         // this.interval --> interval created
 
         this.mana = 20;
-        this.gold =150;
+        this.gold =20000;
+        this.gold_speed = 1;
+        this.gold_speed_cost = 300;
+        this.max_goold_spped = 10;
 
         this.cast_rain = false;
         this.cast_snow = false;
@@ -546,10 +556,14 @@ export default class Game{
         this.ctx.fillText(String(this.current_level.enemys), 0, 15);
         
         this.ctx.fillStyle = "red";
-        this.ctx.fillText(String(this.escapedEnemys), this.width - 30, 15);
+        this.ctx.fillText(String(this.escapedEnemys) + "/7", this.width - 30, 15);
 
         this.ctx.fillStyle = "blue";
         this.ctx.fillText(String(this.mana) + "/20", this.width/2 -150, 15);
+
+        this.ctx.fillStyle = "grey";
+        this.ctx.font = '20px serif';
+        this.ctx.fillText(String(this.level_count + 1) + "/" + String(this.Levels.length), this.width/2 -70, 15);
 
         this.ctx.fillStyle = "yellow";
         this.ctx.fillText(String(this.gold), this.width/2 + 10  , 15);
@@ -606,7 +620,7 @@ export default class Game{
     }
 
     increaseG(){
-             this.gold +=1;
+             this.gold +=this.gold_speed;
     }
 
     stopGold(){
@@ -680,6 +694,28 @@ export default class Game{
            
     }
 
+
+    addWizard(){
+        if(this.gold >= this.wizard_cost && this.wizard_number < 1 ){
+        var cost = document.getElementById("wizard_cost");
+
+        var new_wizard = new WizardAlly(this);
+        this.allys.push(new_wizard);
+        this.gold -= this.wizard_cost;
+       // this.archer_cost +=  this.archer_cost;
+        cost.innerHTML = this.wizard_cost;
+        this.wizard_number++;
+
+        }
+        if(this.wizard_number == 1)
+        {
+            var cost = document.getElementById("wizard_cost");
+            cost.innerHTML = "maxed out";
+
+        }
+           
+    }
+
     addViking(){
         if(this.gold >= this.viking_cost && this.viking_number < this.max_viking ){
         var cost = document.getElementById("viking_cost");
@@ -701,13 +737,16 @@ export default class Game{
            
     }
     incresArcherSpeed(){
-        if(this.gold >= this.archer_speed_cost)
+        var cost = document.getElementById("archer_cost_speed");
+        if(this.gold >= this.archer_speed_cost && this.current_archer_update < this.max_archer_speed)
         {
         Ally.increaseSpeedReload();
+        this.current_archer_update += 1;
         this.gold -= this.archer_speed_cost;
         this.archer_speed_cost += this.archer_speed_cost;
-        var cost = document.getElementById("archer_cost_speed");
         cost.innerHTML =  this.archer_speed_cost;
+        }else if(this.current_archer_update == 9){
+            cost.innerHTML =  "maxed out";
         }
 
     }
@@ -728,31 +767,36 @@ export default class Game{
 
 
     rain_cost_decrees(){
+        var rainC = document.getElementById("RAIN_COST");
+        var cost = document.getElementById("rain_cost_decrees");
+
         if(this.gold >= this.rain_cost_D &&  this.rain_cost != 3)
         {
             this.gold  -= this.rain_cost_D;
             this.rain_cost_D += this.rain_cost_D;
-            var cost = document.getElementById("rain_cost_decrees");
             cost.innerHTML =  this.rain_cost_D;
-            var rainC = document.getElementById("RAIN_COST");
             this.rain_cost -= 1;
             rainC.innerHTML = this.rain_cost;
+        }else if(this.rain_cost == 3){
+            cost.innerHTML = "maxed _out";
         }
 
     }
 
     snow_cost_decrease()
     {
+        var cost = document.getElementById("snow_cost_decrees");
         if(this.gold >= this.snow_cost_decreasee &&  this.snow_cost != 9){
          this.gold -= this.snow_cost_decreasee;
          this.snow_cost_decreasee += 250;
-         var cost = document.getElementById("snow_cost_decrees");
          cost.innerHTML = this.snow_cost_decreasee;
          var cost2 = document.getElementById("snow_cost");
          this.snow_cost -= 3;
          cost2.innerHTML = this.snow_cost ;
 
 
+        }else if(this.snow_cost == 9){
+            cost.innerHTML = "maxed out";
         }
     }
 
@@ -789,6 +833,22 @@ export default class Game{
     })
 
        }
+
+}
+
+increaseGoldSpead(){
+    var cost = document.getElementById("gold_speed_cost");
+    if(this.gold >= this.gold_speed_cost && this.gold_speed < 10)
+    {
+        this.gold_speed += 1;
+        this.gold -= this.gold_speed_cost;
+        this.gold_speed_cost += 600;
+        cost.innerHTML = this.gold_speed_cost;
+
+    }else if(this.gold_speed == 10){
+        
+        cost.innerHTML = "maxed out";
+    }
 
 }
 

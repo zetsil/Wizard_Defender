@@ -52,8 +52,8 @@ update(deltaTime){
       return;
     if(this.freez_state == true)
       return;    
-      if(this.pos_x > (this.game.width -15)){
-        this.pos_x = (this.game.width -15);
+      if((this.pos_x + this.Width) > (this.game.width)){
+        this.pos_x = (this.game.width  -this.Width);
         this.sound.play();
         this.invers = -this.invers;
         this.game.gold += 8 + GoldCart.CAPACITY;

@@ -17,6 +17,8 @@ document.getElementById("archer").addEventListener("click",addArcher);
 document.getElementById("gold_cart").addEventListener("click",addCart);
 document.getElementById("solider").addEventListener("click",addSolider);
 document.getElementById("viking").addEventListener("click",addViking);
+document.getElementById("wizard").addEventListener("click",addWizard);
+
 
 document.getElementById("bomb").addEventListener("click",startBomb);
 
@@ -27,19 +29,23 @@ document.getElementById("archer_speed").addEventListener("click",incresArcherSpe
 document.getElementById("rain_cost_decrees_button").addEventListener("click",rainCost);
 document.getElementById("snow_cost_decrees_button").addEventListener("click",snowCost);
 document.getElementById("gold_cart_increase_button").addEventListener("click",cartSpeed);
+document.getElementById("gold_speed_button").addEventListener("click",goldSpeed);
 
 
 const assets = [
   "assets/RetroPickUpCoin.wav",
   "assets/RetroChargeMagic.wav",
+  "assets/game_hit_sound_effect.mp3",
   "assets/mixkit-explosion-spell.wav",
   "assets/archer_1.mp3",
   "assets/archer_2.mp3",
   "assets/archer_3.mp3",
   "assets/archer_4.mp3",
   "assets/archer_5.mp3",
+  "assets/skeleton_animation.png",
   "assets/archere_animation.png",
   "assets/solider_animation.png",
+  "assets/wizard_violet.png",
   "assets/gold_cart.png",
   "assets/game_hit_sound_effect.mp3",
 ];
@@ -47,19 +53,19 @@ const assets = [
 
 const assetsLoaded = assets.map(url =>
   new Promise((resolve, reject) => {
-    const img = new Image();
-    const sound = new Audio();
-
     const extension =url.split('.').pop();
     if(extension == "mp3" || extension == "wav")
+       var  sound = new Audio(url);
+    else   
+       var img = new Image(url);
+
+    if(extension == "mp3" || extension == "wav")
     {
-      console.log("heloo frome here");
       sound.onerror = e => reject(`${url} failed to load`);
       sound.onload = e => resolve(img);
       sound.src = url;
     }else
     {
-      console.log("heloo");
       img.onerror = e => reject(`${url} failed to load`);
       img.onload = e => resolve(img);
       img.src = url;
@@ -103,7 +109,9 @@ window.onclick = function(event) {
     Promise
   .all(assetsLoaded)
   .then(startGame())
-  .catch(err => console.error(err))
+  .catch(err => console.error(err)
+  
+  )
 ;
   }
 
@@ -120,7 +128,23 @@ window.onclick = function(event) {
     let fire_space =  document.getElementById("fire");
     let bomb =  document.getElementById("bomb");
 
+    let rain_cost = document.getElementById("RAIN_COST");
+    let snow_cost = document.getElementById("snow_cost");
+    let fire_cost = document.getElementById("fire_cost");
+    let bomb_count = document.getElementById("bomb_number");
 
+    let VIKING = document.getElementById("viking");
+    let solider = document.getElementById("solider");
+    let gold_cart = document.getElementById("gold_cart");
+    let archer = document.getElementById("archer");
+    let wizard = document.getElementById("wizard");
+    let gold_space = document.getElementById("gold_space");
+
+    let VIKING_cost = document.getElementById("viking_cost");
+    let solider_cost = document.getElementById("solider_cost");
+    let gold_cart_cost = document.getElementById("gold_cart_cost");
+    let archer_cost = document.getElementById("archer_cost");
+    let wizard_cost = document.getElementById("wizard_cost");
 
 
 
@@ -129,6 +153,28 @@ window.onclick = function(event) {
     snow_space.style.visibility="visible";
     fire_space.style.visibility="visible";
     bomb.style.visibility="visible";
+
+    rain_cost.style.visibility="visible";
+    snow_cost.style.visibility="visible";
+    snow_space.style.visibility="visible";
+    fire_cost.style.visibility="visible";
+    bomb_count.style.visibility="visible";
+
+    solider.style.visibility="visible";
+    gold_cart.style.visibility="visible";
+    archer.style.visibility="visible";
+    wizard.style.visibility="visible";
+    gold_space.style.visibility="visible";
+    VIKING.style.visibility="visible";
+
+    solider_cost.style.visibility="visible";
+    gold_cart_cost.style.visibility="visible";
+    archer_cost.style.visibility="visible";
+    wizard_cost.style.visibility="visible";
+    VIKING_cost.style.visibility="visible";
+
+
+
     startScreen.style.visibility='hidden';
 
     // var popup = document.getElementById("myPopup");
@@ -286,6 +332,12 @@ function addViking(){
      game.addViking();
 }
 
+function addWizard(){
+  if (typeof game != 'undefined')
+     game.addWizard();
+}
+
+
 
 function incresArcherSpeed(){
     console.log("heloo");
@@ -310,4 +362,9 @@ function cartSpeed(){
 function startBomb(){
   if (typeof game != "undefined")
      game.bombExplode();
+}
+
+function goldSpeed(){
+  if (typeof game != "undefined")
+     game.increaseGoldSpead();
 }
